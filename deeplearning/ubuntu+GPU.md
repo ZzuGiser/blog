@@ -72,3 +72,35 @@ sudo apt-get install g++
 ./mnistCUDNN
 ```
 
+# conda 环境配置
+
+```bash
+# 安装与配置变量
+sh ./Anaconda3-2020.07-Linux-x86_64.sh
+sudo gedit ~/.bashrc
+export PATH=$PATH:/home/two218/anaconda3/bin
+source ~/.bashrc
+
+# 配置镜像源
+
+conda config --add channels https://mirrors.ustc.edu.cn/anaconda/pkgs/main/
+conda config --add channels https://mirrors.ustc.edu.cn/anaconda/pkgs/free/
+conda config --add channels https://mirrors.ustc.edu.cn/anaconda/cloud/conda-forge/
+conda config --add channels https://mirrors.ustc.edu.cn/anaconda/cloud/msys2/
+conda config --add channels https://mirrors.ustc.edu.cn/anaconda/cloud/bioconda/
+conda config --add channels https://mirrors.ustc.edu.cn/anaconda/cloud/menpo/
+conda config --remove channels
+conda config --set show_channel_urls yes
+conda info
+
+# 配置pytorch环境
+conda create -n pytorch python=3.6
+
+# 检测 pytorch环境
+import torch
+print(torch.__version__)
+print(torch.cuda.is_available())
+
+
+```
+
