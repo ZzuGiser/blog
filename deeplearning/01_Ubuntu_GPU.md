@@ -54,20 +54,32 @@ nvcc --version，如果显示下面的文子就说明安装成功了。
 
 ## 3.安装cuDNN
 
- 到[官网](https://link.zhihu.com/?target=https%3A//developer.nvidia.com/rdp/cudnn-download)下载选择对应的版本，注意有三个包 
+ 到[官网](https://link.zhihu.com/?target=https%3A//developer.nvidia.com/rdp/cudnn-download)下载选择对应的版本， 需要注册登录才能下载。 选择第一个for linux 
 
 ```bash
+tar -zxvf cudnn-10.0-<自己的版本>.tgz
+sudo cp cuda/include/cudnn.h /usr/local/cuda/include/ 
+sudo cp cuda/lib64/libcudnn* /usr/local/cuda/lib64/ 
+sudo chmod a+r /usr/local/cuda/include/cudnn.h 
+sudo chmod a+r /usr/local/cuda/lib64/libcudnn*
+
+cat /usr/local/cuda/include/cudnn.h | grep CUDNN_MAJOR -A 2
+
+export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/cuda/lib64:/usr/local/cuda/extras/CUPTI/lib64"
+export CUDA_HOME=/usr/local/cuda
+export PATH="CUDAHOME/bin:$PATH"
+source ~/.bashrc
+# 检测 cudnn 安装是否成功
 sudo dpkg -i libcudnn7_7.6.5.32-1+cuda10.2_amd64.deb
 sudo dpkg -i libcudnn7-dev_7.6.5.32-1+cuda10.2_amd64.deb
 sudo dpkg -i libcudnn7-doc_7.6.5.32-1+cuda10.2_amd64.deb
 
-# 检查CUDNN是否安装
 cd /usr/src/cudnn_samples_v7/mnistCUDNN
 sudo make clean
-sudo make（出错了，提示没有安装g++,那就安装一下,这里大家遇到的问题可能都不太一样，就是看他缺啥，咱就补啥就行）
-//卸载g++:
+sudo make#出错了，提示没有安装g++,那就安装一下,这里大家遇到的问题可能都不太一样，就是看他缺啥，咱就补啥就行）
+#卸载g++:
 sudo apt-get remove g++
-//重装：
+#重装：
 sudo apt-get install g++
 ./mnistCUDNN
 ```
@@ -101,6 +113,8 @@ import torch
 print(torch.__version__)
 print(torch.cuda.is_available())
 
+# 配置pytorch-gpu 
+conda install pytorch torchvision torchaudio cudatoolkit=10.2 -c pytorch
 
 ```
 
