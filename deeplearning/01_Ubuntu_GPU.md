@@ -52,7 +52,7 @@ nvcc --version，如果显示下面的文子就说明安装成功了。
 
 这个地方不要下载Driver，因为之前已经安装完了，一定要选择CUDA Toolkit 10.2，下面的选填，我觉得把sample下载下来还挺把握，可能安装之后还需要测试一下。接下来点击install 
 
-## 3.安装cuDNN
+### 3.安装cuDNN
 
  到[官网](https://link.zhihu.com/?target=https%3A//developer.nvidia.com/rdp/cudnn-download)下载选择对应的版本， 需要注册登录才能下载。 选择第一个for linux 
 
@@ -84,7 +84,7 @@ sudo apt-get install g++
 ./mnistCUDNN
 ```
 
-# conda 环境配置
+### 4 conda 环境配置
 
 ```bash
 # 安装与配置变量
@@ -101,9 +101,9 @@ conda config --add channels https://mirrors.ustc.edu.cn/anaconda/cloud/conda-for
 conda config --add channels https://mirrors.ustc.edu.cn/anaconda/cloud/msys2/
 conda config --add channels https://mirrors.ustc.edu.cn/anaconda/cloud/bioconda/
 conda config --add channels https://mirrors.ustc.edu.cn/anaconda/cloud/menpo/
-conda config --remove channels
 conda config --set show_channel_urls yes
 conda info
+conda config --remove channels
 
 # 配置pytorch环境
 conda create -n pytorch python=3.6
